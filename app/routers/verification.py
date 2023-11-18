@@ -2,8 +2,8 @@ from fastapi import HTTPException, APIRouter
 from fastapi.responses import JSONResponse
 import httpx
 
-from app.models.check_code import CheckCodeRequest
-from app.models.verify import VerificationRequest
+from models.check_code import CheckCodeRequest
+from models.verify import VerificationRequest
 from vonage_custom.client import ClientV2
 
 router = APIRouter()
