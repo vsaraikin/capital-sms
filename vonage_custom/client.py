@@ -2,7 +2,7 @@ import base64
 
 import requests
 
-from app.configs import API_KEY, API_SECRET
+from configs import API_KEY, API_SECRET
 
 
 class ClientV2:

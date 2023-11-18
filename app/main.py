@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import verification
+from routers import verification
 
 app = FastAPI()
 
