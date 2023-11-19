@@ -30,9 +30,6 @@ class ClientV2:
 
     def verify_message(self, request_id, code):
         url = f"{self.base_url}/verify/{request_id}"
-        data = {
-            "code": code
-        }
+        data = {"code": code}
         response = self._post(url, data)
         return response
-
