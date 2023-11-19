@@ -1,24 +1,15 @@
+import colorama
+import logging
 from fastapi import FastAPI
 from routers import verification
-import logging
-from fastapi.logger import logger as fastapi_logger
+from utils.logger import load_logger
 
-from logging.config import dictConfig
-from utils.logger import log_config
+colorama.init()
 
-# Logging
-dictConfig(log_config)
-gunicorn_error_logger = logging.getLogger("gunicorn.error")
-gunicorn_logger = logging.getLogger("gunicorn")
-uvicorn_access_logger = logging.getLogger("uvicorn.access")
-uvicorn_access_logger.handlers = gunicorn_error_logger.handlers
+load_logger("logging.yaml")
 
-fastapi_logger.handlers = gunicorn_error_logger.handlers
+logger = logging.getLogger(__name__)
 
-if __name__ != "__main__":
-    fastapi_logger.setLevel(gunicorn_logger.level)
-else:
-    fastapi_logger.setLevel(logging.DEBUG)
 
 app = FastAPI(debug=True)
 

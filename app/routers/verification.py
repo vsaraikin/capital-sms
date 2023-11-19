@@ -13,7 +13,7 @@ vonage = ClientV2()
 users_calls = {}  # TODO: some better user identification may be placed (e.g. DB)
 
 
-logger = logging.getLogger('capital-sms')
+logger = logging.getLogger(__name__)
 
 
 @router.post("/verify")
