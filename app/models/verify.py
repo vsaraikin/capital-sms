@@ -18,7 +18,7 @@ class VerificationRequestVonage(BaseModel):
 
 
 class VerificationRequest(BaseModel):
-    to: str
+    to: str  # phone number
 
 
 class VerificationResponse202(BaseModel):

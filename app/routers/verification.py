@@ -10,20 +10,20 @@ router = APIRouter()
 vonage = ClientV2()
 
 
-users_calls = {}
+users_calls = {}  # TODO: some better user identification may be placed
 
 
 @router.post("/verify")
 async def request_verification(verification: VerificationRequest):
     try:
-        response = vonage.send_message(
+        response = await vonage.send_message(
             {
                 "locale": "es-es",  # optional TODO: some client country func may be placed
                 "channel_timeout": 300,  # optional
                 "client_ref": "my-ref",  # optional
                 "brand": "Capital.com",  # required
                 "workflow": [
-                    {"channel": "sms", "to": verification.to}  # required  # required
+                    {"channel": "sms", "to": verification.to}  # required
                 ],
             }
         )
@@ -39,17 +39,15 @@ async def request_verification(verification: VerificationRequest):
         raise HTTPException(status_code=e.response.status_code, detail=str(e))
 
 
-@router.post("/check/{request_id}")
+@router.post("/check")
 async def check_code(data: CheckCodeRequest):
-    # TODO: Identify user in other way
     try:
-        response = vonage.verify_message(users_calls["48600756692"], data.code)
+        response = await vonage.verify_message(users_calls[data.to], data.code)
 
         if response.status_code == 200:
-            del response["request_id"]  # remove request id
-            return JSONResponse(status_code=200, content=response)
+            users_calls.pop(data.to)  # request completed => remove it
+            return JSONResponse(status_code=200, content=None)
         else:
-            del response["instance"]  # remove request id
             return JSONResponse(
                 status_code=400, content={"Error from Vonage": response.json()}
             )
