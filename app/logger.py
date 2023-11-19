@@ -1,5 +1,4 @@
-import logging
-import logging.config as cf
+import logging.config
 from pathlib import Path
 
 import yaml
@@ -19,7 +18,7 @@ class ColoredFormatter(logging.Formatter):
         logging.Formatter.__init__(self, fmt)
         self.use_color = use_color
 
-    def format(self, record):
+    def format(self, record) -> str:
         msg = super().format(record)
         if self.use_color and record.levelname in COLORS:
             return f"{COLORS[record.levelname]}{msg}{Style.RESET_ALL}"
@@ -27,13 +26,10 @@ class ColoredFormatter(logging.Formatter):
 
 
 def load_logger(yaml_filename):
-    # Get the directory of the current file (__file__)
-    current_directory = Path(__file__).parent.absolute().parent.absolute()
+    current_directory = Path(__file__).parent.absolute()
 
-    # Append the YAML file to this path
     yaml_file_path = current_directory / yaml_filename
 
-    # Load and apply logging configuration
-    with open(yaml_file_path, 'r') as file:
+    with open(yaml_file_path, "r") as file:
         config = yaml.safe_load(file)
         logging.config.dictConfig(config)

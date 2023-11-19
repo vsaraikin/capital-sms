@@ -3,3 +3,5 @@
 .vscode
 __pycache__
 app/logs
+.ruff_cache
+venv
