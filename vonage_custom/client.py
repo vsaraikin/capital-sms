@@ -16,18 +16,18 @@ class ClientV2:
         signature = base64.b64encode(key.encode("utf-8")).decode("ascii")
         return f"Basic {signature}"
 
-    async def _post(self, url, params):
+    async def _post(self, url: str, params: dict[str]):
         headers = {"Authorization": self._sign()}
         async with httpx.AsyncClient(verify=False) as client:  # TODO: verify=True fix
             response = await client.post(url, json=params, headers=headers)
         return response
 
-    async def send_message(self, data):
+    async def send_message(self, data: dict[str]):
         url = f"{self.base_url}/verify/"
         response = await self._post(url, data)
         return response
 
-    async def verify_message(self, request_id, code):
+    async def verify_message(self, request_id: str, code: str):
         url = f"{self.base_url}/verify/{request_id}"
         data = {"code": code}
         response = await self._post(url, data)
