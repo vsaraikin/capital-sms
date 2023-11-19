@@ -1,24 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
-
-
-class VerificationWorkflow(BaseModel):
-    channel: str
-    to: str
-
-
-class VerificationRequestVonage(BaseModel):
-    locale: Optional[str] = None
-    channel_timeout: Optional[int] = None
-    client_ref: Optional[str] = None
-    code_length: Optional[int] = None
-    code: Optional[str] = None
-    brand: str
-    workflow: List[VerificationWorkflow]
-
-
-class VerificationRequest(BaseModel):
-    to: str
+from typing import List
 
 
 class VerificationResponse202(BaseModel):
@@ -52,3 +33,8 @@ class VerificationResponse429(BaseModel):
     type: str
     detail: str
     instance: str
+
+
+class CheckCodeResponse(BaseModel):
+    request_id: str
+    status: str
