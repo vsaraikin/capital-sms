@@ -26,13 +26,13 @@ async def request_verification(verification: VerificationRequest):
                 "channel_timeout": 300,  # optional
                 "client_ref": "my-ref",  # optional
                 "brand": "Capital.com",  # required
-                "workflow": [{"channel": "sms", "to": verification.to}],  # required
+                "workflow": [{"channel": "sms", "to": verification.phone}],  # required
             }
         )
         if response.status_code == 202:  # vonage success
             logger.info(" /verify")
             request_id = response.json()["request_id"]
-            users_calls[verification.to] = request_id
+            users_calls[verification.phone] = request_id
             return JSONResponse(status_code=200, content=None)
         else:
             logger.error(f"Error /verify {response.status_code}")
