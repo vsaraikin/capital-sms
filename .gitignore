@@ -5,3 +5,4 @@ __pycache__
 app/logs
 .ruff_cache
 venv
+.mypy_cache

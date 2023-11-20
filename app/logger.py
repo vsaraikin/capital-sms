@@ -25,7 +25,7 @@ class ColoredFormatter(logging.Formatter):
         return msg
 
 
-def load_logger(yaml_filename):
+def load_logger(yaml_filename: str):
     current_directory = Path(__file__).parent.absolute()
 
     yaml_file_path = current_directory / yaml_filename
