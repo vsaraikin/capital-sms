@@ -2,7 +2,7 @@ from typing import Any
 import base64
 import httpx
 
-from configs import API_KEY, API_SECRET
+from app.configs import API_KEY, API_SECRET
 
 
 class ClientV2:

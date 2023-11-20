@@ -2,9 +2,9 @@ import colorama
 import logging
 from fastapi import FastAPI
 
-from configs import settings
-from routers import sms_handler
-from logger import load_logger
+from app.configs import settings
+from app.routers import sms_handler
+from app.logger import load_logger
 
 colorama.init()
 

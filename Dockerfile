@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /app
+WORKDIR /code
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -12,8 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./entrypoint.sh .
 RUN chmod +x ./entrypoint.sh
 
-COPY ./app ./
-COPY .env ./
-
+COPY ./app/ ./app
+COPY .env .
 
 CMD ["sh","./entrypoint.sh"]
