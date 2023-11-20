@@ -5,15 +5,19 @@
 Copy `.env.example`, name it `.env`, input your credentials from Vonage.
 
 ### To run app in docker:
-``make run``
+```shell
+make run
+```
 
 ### To run locally:
 
-1. In a separate venv `pip install -r requirements.txt`
-2. `cd app`
-3. `uvicorn main:app --reload --log-config=./logging.yaml`
+- In a separate venv `pip install -r requirements.txt`
 
->Note: It is important that if you run it locally, you do that from `app` folder.
+#### In terminal
+
+```shell
+sh entrypoint.sh
+```
 
 ## Things that might be done, but I don't have time for:
 
@@ -27,5 +31,4 @@ Copy `.env.example`, name it `.env`, input your credentials from Vonage.
 
 ## Misc
 
-1. If you use PyCharm, mark `app` as Source Root for better compatibility.
-2. Run `pre-commit install` to automatically run checks before commit.
+1. Run `pre-commit install` to automatically run checks before commit.
