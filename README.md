@@ -19,6 +19,24 @@ make run
 sh entrypoint.sh
 ```
 
+## Tests
+
+### `/verify` sends SMS to selected number
+
+```shell
+curl -X POST http://127.0.0.1:8000/api/verify \
+-H "Content-Type: application/json" \
+-d '{"phone": "your number"}'
+```
+
+### `/check` confirms whether code sent to the phone is correct
+
+```shell
+curl -X POST http://127.0.0.1:8000/api/check \
+-H "Content-Type: application/json" \
+-d '{"to": "your number", "code": ""}
+```
+
 ## Things that might be done, but I don't have time for:
 
 1. Add better typing to routers. Each should have right `response_model`. Some models have been written in `vonage_custom/models.py`.
